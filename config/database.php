@@ -1,5 +1,7 @@
 <?php
 
+//Used php artisan migrate to set up tables in db
+
 return [
 
     /*
