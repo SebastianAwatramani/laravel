@@ -21,8 +21,44 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/contact', 'PagesController@contact');
 
-Route::get('/projects', 'ProjectsController@index');
 
+
+/*
+ * GET
+ *  index
+ *
+ * POST
+ *  store
+
+ * PATCH
+ *  Update /projects/1 - update a specific project with id of 1
+ *
+ * DELETE
+ *  /projects/1 - destroy a project with id of 1
+ */
+
+//Working with specific projects
+
+Route::get('/projects', 'ProjectsController@index');
+Route::post('/projects', 'ProjectsController@store');
 Route::get('/projects/create', 'ProjectsController@create');
 
-Route::post('/projects', 'ProjectsController@store');
+
+//Show specific project
+//GET project/x (show)
+Route::get('/projects/{project}', 'ProjectsController@show');  //Wild card
+
+//Edit project
+Route::get('/projects/{project}/edit', "ProjectsController@edit"); //Will display a form to update the project
+
+//Patch (analogous to store); used to handle the edit and perform the actual update
+
+Route::patch('/projects/{project}', "ProjectsController@update");
+
+//Delete
+
+Route::delete("/projects/{project}", "ProjectsController@destroy");
+
+//BUT HOLY SHIT! LARAVEL CAN TAKE CARE OF ALL OF THE ABOVE WITH A SIMPLE METHOD CALL
+
+Route::resource('projects', 'ProjectsController');

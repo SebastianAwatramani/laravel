@@ -11,6 +11,7 @@ use App\Project;
 class ProjectsController extends Controller
 {
     public function index()
+
     {
         //Starting this with a backslash (\App\Project:all()) means that it starts at root.
 
@@ -23,11 +24,15 @@ class ProjectsController extends Controller
         //This  will look in resources/views/projects/index.blade.php
         return view('projects.index', compact('projects'));
     }
+
     public function create()
+
     {
         return view('projects.create');
     }
+
     public function store()
+
     {
         $project = new Project();
 
@@ -38,4 +43,30 @@ class ProjectsController extends Controller
 
         return redirect('/projects');
     }
+
+    public function show()
+
+    {
+
+    }
+
+    public function edit()
+
+    {
+
+    }
+
+    public function update()
+
+    {
+
+    }
+
+    public function destroy()
+
+    {
+
+    }
+
+
 }
