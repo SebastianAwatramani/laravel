@@ -54,7 +54,7 @@ class ProjectsController extends Controller
         //Does not seem to matter what it is named.  Returns ["1"]
     {
 
-        $project = Project::Find($id);
+        $project = Project::FindorFail($id);
         return view('projects.edit', compact('project'));
     }
 
