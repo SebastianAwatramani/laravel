@@ -19,7 +19,6 @@ class ProjectsController extends Controller
         //Assigns json from the db to $projects
         $projects = Project::all();
 
-//        return $projects;
 
         //This  will look in resources/views/projects/index.blade.php
         return view('projects.index', compact('projects'));
@@ -50,16 +49,29 @@ class ProjectsController extends Controller
 
     }
 
-    public function edit()
-
+    public function edit($id) //projects/{project}/edit
+        //Because this was setup as wildcard in the routing, Laravel will pass it.  e.g. /projects/1/edit, the 1 is passed as method argument
+        //Does not seem to matter what it is named.  Returns ["1"]
     {
 
+        $project = Project::Find($id);
+        return view('projects.edit', compact('project'));
     }
 
-    public function update()
+    public function update($id)
 
     {
+        //dd() = die and dump.  Good for debugging
+        //dd(request()->all());
 
+        $project = Project::find($id);
+
+        $project->title = request('title');
+        $project->description = request('description');
+
+        $project->save();
+
+        return redirect('/projects');
     }
 
     public function destroy()
