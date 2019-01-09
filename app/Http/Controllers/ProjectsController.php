@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//Because I use use App\Projects, I can call Project::all() without prefixing it with App\
+
+use App\Project;
+
 class ProjectsController extends Controller
 {
     public function index()
     {
-        //Starting this with a backslash means that it starts at root.  Could also do:
-        //use App\Project and then just call Project::all()
+        //Starting this with a backslash (\App\Project:all()) means that it starts at root.
+
 
         //Assigns json from the db to $projects
-        $projects = \App\Project::all();
+        $projects = Project::all();
 
 //        return $projects;
 
