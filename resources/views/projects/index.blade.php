@@ -10,5 +10,5 @@
         {{$project->title}}
         <br>
     @endforeach
-
+    <a href="/projects/create">Create a Project</a>
 @endsection
