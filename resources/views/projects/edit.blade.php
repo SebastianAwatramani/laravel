@@ -23,5 +23,12 @@
             </div>
             <button type="submit">Submit</button>
         </form>
+        <form method="POST" action="/projects/{{ $project->id }}">
+            {{ method_field("DELETE") }}
+            {{ csrf_field() }}
+
+            <button type="Submit">Delete</button>
+
+        </form>
     </div>
 @endsection
