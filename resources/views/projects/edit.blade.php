@@ -12,7 +12,7 @@
             {{--Since we are patching, we need to send a patch request, but HTML does not support anything but GET/POST--}}
             {{--So instead we will run a POST request, but will insert a Laravel helper method_field() to specific what kind of request we really want to make--}}
 
-            @method('DELETE') {{--{{ method_field('PATCH') }}--}}
+            @method('PATCH') {{--{{ method_field('PATCH') }}--}}
             @csrf {{--{{ csrf_field() }}--}}
 
 
