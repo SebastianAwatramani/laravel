@@ -10,5 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    //
+    //with $fillable[], we say which fields are fillable
+    //with $guarded[], we say to accept everything EXCEPT for these fields
+    //In my estimation, $fillable seems to be more secure and to take less work.  With $guarded[], it seems I'd have to always remember to specify all the protected fields
+    protected $fillable = [
+        'title',
+        'description'
+    ];
 }

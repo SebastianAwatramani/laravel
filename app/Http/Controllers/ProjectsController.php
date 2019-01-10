@@ -32,12 +32,12 @@ class ProjectsController extends Controller
     public function store()
 
     {
-        $project = new Project();
-
-        $project->title = request('title');
-        $project->description = request('description');
-
-        $project->save();
+        //This passes all request data and so can throw a mass assignment error, because this can be a security risk
+        //The solution is to add the desired fields to $fillable in the model
+        Project::create([
+            'title' => request('title'),
+            'description' => request('description')
+        ]);
 
         return redirect('/projects');
     }
@@ -65,12 +65,16 @@ class ProjectsController extends Controller
 
     {
         //dd() = die and dump.  Good for debugging
+
+        //Short hand for update
+        $project->update(request(['title', 'description']));
+
         //dd(request()->all());
 
-        $project->title = request('title');
-        $project->description = request('description');
-
-        $project->save();
+//        $project->title = request('title');
+//        $project->description = request('description');
+//
+//        $project->save();
 
         return redirect('/projects');
     }
