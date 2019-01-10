@@ -32,12 +32,27 @@ class ProjectsController extends Controller
     public function store()
 
     {
-        //This passes all request data and so can throw a mass assignment error, because this can be a security risk
-        //The solution is to add the desired fields to $fillable in the model
-        Project::create([
-            'title' => request('title'),
-            'description' => request('description')
-        ]);
+//        This passes all request data and so can throw a mass assignment error, because this can be a security risk
+//        The solution is to add the desired fields to $fillable in the model
+
+//        Short hand
+//        Project::create([
+//            'title' => request('title'),
+//            'description' => request('description')
+//        ]);
+
+
+//        Validation
+//        If validation fails, it redirects to previous page and sends through validation errors, which can be accessed through an errors variable
+//        Assigning the response from request()->validate() returns an array with the validadted data.  Can simply pass that into Project::create()
+
+        $validate = request()->validate([
+            'title' => ['required', 'min:3'], //could also use | here to separate requirements
+            'description' => 'required'
+    ]);
+//        Even better
+//        And even better than this, could just wrap the above request in a Project::create() call and it would only take that one command
+        Project::create($validate);
 
         return redirect('/projects');
     }
