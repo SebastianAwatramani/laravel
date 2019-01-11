@@ -44,7 +44,7 @@ class ProjectsController extends Controller
 
 //        Validation
 //        If validation fails, it redirects to previous page and sends through validation errors, which can be accessed through an errors variable
-//        Assigning the response from request()->validate() returns an array with the validadted data.  Can simply pass that into Project::create()
+//        Assigning the response from request()->validate() returns an array with the validated data.  Can simply pass that into Project::create()
 
         $validate = request()->validate([
             'title' => ['required', 'min:3'], //could also use | here to separate requirements

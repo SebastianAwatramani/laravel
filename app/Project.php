@@ -22,4 +22,14 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function addTask(array $taskAttributes)
+
+    {
+//        So the way I think this works is that the above tasks() returns a reference to a Task() class, then it runs the model::create() and passes along the description.
+//        It also automatically includes the $project_id of the current project because laravel realizes that this is necessary.  Probably defined in the task-project
+//    relationship somewhere, but I wasn't able to figure it out'
+        $this->tasks()->create($taskAttributes);
+    }
+
 }

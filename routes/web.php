@@ -65,5 +65,11 @@ Route::resource('projects', 'ProjectsController');
 
 //Task routes
 
+//Update an existing task
 Route::patch('/tasks/{task}', 'ProjectTasksController@update');
+
+//Create a new task
+Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
+
+
 
