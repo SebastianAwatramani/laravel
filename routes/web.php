@@ -62,3 +62,8 @@ Route::delete("/projects/{project}", "ProjectsController@destroy");
 //BUT HOLY SHIT! LARAVEL CAN TAKE CARE OF ALL OF THE ABOVE WITH A SIMPLE METHOD CALL
 
 Route::resource('projects', 'ProjectsController');
+
+//Task routes
+
+Route::patch('/tasks/{task}', 'ProjectTasksController@update');
+
