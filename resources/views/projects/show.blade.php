@@ -12,15 +12,22 @@
         <div>
             @foreach($project->tasks as $task)
                 {{--Note that each form is separate--}}
-                <form method="POST" action="/tasks/{{ $task->id }}">
-                    @method("PATCH")
+                <form method="POST" action="/completed-tasks/{{ $task->id }}" class="box">
+                    {{--@method("PATCH")--}}
                     @csrf
-                    <label for="completed" class="checkbox"></label>
-                    <input type="checkbox" name="completed"
-                           onchange="this.form.submit()" {{$task->completed ? "checked" : ""}}>
+
+                    @if($task->completed)
+                        @method("DELETE")
+                    @endif
+
+                    <label for="completed" class="checkbox">
+                        <input type="checkbox" name="completed"
+                               onchange="this.form.submit()" {{$task->completed ? "checked" : ""}}>
+                        {{ $task->description }}
+                    </label>
                 </form>
 
-                <li>Task: {{ $task->description }}</li>
+
             @endforeach
 
         </div>

@@ -15,17 +15,22 @@ class ProjectTasksController extends Controller
         return back();
     }
 
-    public function update(Task $task)
-    {
-//        $task->complete(request()->has('completed'));
+    /*
+     * Now using CompletedTasksController() to take care completing tasks, so the following is no longer necessary (but still cool)
+     *
+     * */
 
-        //Alternative with dynamic method call (!)
-        //This is really cool. Will select which method to use based on input.  Makes it more readable.  See Task.php
-        //NOTE: I am using a second $ sign here to signify I am refering to a local var and not a method in Task()
-        $method = request()->has('completed') ? 'complete' : 'incomplete';
-
-        $task->$method();
-
-        return back();
-    }
+//    public function update(Task $task)
+//    {
+////        $task->complete(request()->has('completed'));
+//
+//        //Alternative with dynamic method call (!)
+//        //This is really cool. Will select which method to use based on input.  Makes it more readable.  See Task.php
+//        //NOTE: I am using a second $ sign here to signify I am refering to a local var and not a method in Task()
+//        $method = request()->has('completed') ? 'complete' : 'incomplete';
+//
+//        $task->$method();
+//
+//        return back();
+//    }
 }

@@ -66,10 +66,14 @@ Route::resource('projects', 'ProjectsController');
 //Task routes
 
 //Update an existing task
-Route::patch('/tasks/{task}', 'ProjectTasksController@update');
+//Route::patch('/tasks/{task}', 'ProjectTasksController@update');
 
 //Create a new task
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
+
+//Here we are going to switch up the way we deal with completing tasks.  Instead have created a new controller, CompletedTasksController()
+Route::post('/completed-tasks/{task}', "CompletedTasksController@store");
+Route::delete("/completed-tasks/{task}", "CompletedTasksController@destroy");
 
 
 
