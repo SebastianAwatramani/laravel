@@ -11,6 +11,14 @@
 |
 */
 
+
+//use App\Repositories\UserRepository;
+//
+//Route::get('/', function(UserRepository $users) {
+//    dd($users);
+//});
+
+
 //Working with a catch all controller
 //Can generate with artisan make:contoller [name]
 
