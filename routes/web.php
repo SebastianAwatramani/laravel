@@ -24,7 +24,7 @@
 //Can generate with artisan make:contoller [name]
 
 //@home refers to a method in the PagesContoller
-Route::get('/', 'PagesController@home')->middleware('app.LogQueries');
+Route::get('/', 'PagesController@home')->middleware('logQueries');
 
 Route::get('/about', 'PagesController@about');
 
