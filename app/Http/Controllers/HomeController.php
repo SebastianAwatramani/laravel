@@ -13,6 +13,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        //If this is commented out, then auth won't work and anyone can access any page
+        //One way to do auth is to have this middleware in the controller, but it could also be done in routes
         $this->middleware('auth');
     }
 

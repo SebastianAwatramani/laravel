@@ -24,7 +24,7 @@
 //Can generate with artisan make:contoller [name]
 
 //@home refers to a method in the PagesContoller
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home')->middleware('app.LogQueries');
 
 Route::get('/about', 'PagesController@about');
 
@@ -88,5 +88,7 @@ Route::delete("/completed-tasks/{task}", "CompletedTasksController@destroy");
 
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//Adding middleware to route
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+//Doing the opposite: requiring that a user NOT be logged in in order to visit a page
+Route::get('/signup', 'HomeController@index')->middleware('guest');
