@@ -12,18 +12,19 @@
 */
 
 
-//use App\Repositories\UserRepository;
-//
-//Route::get('/', function(UserRepository $users) {
-//    dd($users);
-//});
+use App\Repositories\UserRepository;
+use App\Services\Twitter;
+
+Route::get('/', function(Twitter $twitter) {
+    dd($twitter);
+});
 
 
 //Working with a catch all controller
 //Can generate with artisan make:contoller [name]
 
 //@home refers to a method in the PagesContoller
-Route::get('/', 'PagesController@home');
+//Route::get('/', 'PagesController@home');
 
 Route::get('/about', 'PagesController@about');
 

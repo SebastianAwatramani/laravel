@@ -39,5 +39,9 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+    'twitter' => [
+        'key' => env('TWITTER_KEY'),
+        'secret' => env('TWITTER_SECRET')
+    ]
 
 ];
