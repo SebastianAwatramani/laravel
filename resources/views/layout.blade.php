@@ -10,7 +10,7 @@
 {{--@yeild will allow me to place an @section() tag in another file, which will then insert that into the page while still showing everything in this layout file--}}
 @yield('content')
 
-<ul>
+<ul class="box">
     <li><a href="/">Home</a></li>
     <li><a href="/contact">Contact</a></li>
     <li><a href="/about">About us</a></li>
