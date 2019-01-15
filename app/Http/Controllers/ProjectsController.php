@@ -10,14 +10,36 @@ use App\Project;
 
 class ProjectsController extends Controller
 {
+    public function __construct()
+    {
+        /*
+         *
+         * This is one way to force authorization.  However, if I do it here, then it applies to every route.  Do I need it for every route?
+         * Will depend on the page in question
+         * The alternative is to do it in the route, or to use middleware()->only()
+         * e.g. $this->middleware('auth')->only(['store', 'update']);
+         * There is also middleware()->except([...])
+         *
+         * */
+
+        $this->middleware('auth');
+    }
+
     public function index()
 
     {
         //Starting this with a backslash (\App\Project:all()) means that it starts at root.
 
         //Assigns json from the db to $projects
-        $projects = Project::all();
+//        $projects = Project::all();
 
+        auth()->id(); //Null if guest, id if signed in
+        auth()->user(); //returns user instance
+        auth()->check(); //Boolean, true if user signed in
+        auth()->guest(); //Bool, true if guest
+
+
+        $projects = Project::where('owner_id', auth()->id())->get(); //Select * from projects where owner_id = [current user id]
 
         //This  will look in resources/views/projects/index.blade.php
         return view('projects.index', compact('projects'));
@@ -26,6 +48,7 @@ class ProjectsController extends Controller
     public function create()
 
     {
+
         return view('projects.create');
     }
 
@@ -50,6 +73,8 @@ class ProjectsController extends Controller
             'title' => ['required', 'min:3'], //could also use | here to separate requirements
             'description' => 'required'
     ]);
+
+        $validate['owner_id'] = auth()->id();
 //        Even better
 //        And even better than this, could just wrap the above request in a Project::create() call and it would only take that one command
         Project::create($validate);

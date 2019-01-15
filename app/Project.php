@@ -15,7 +15,8 @@ class Project extends Model
     //In my estimation, $fillable seems to be more secure and to take less work.  With $guarded[], it seems I'd have to always remember to specify all the protected fields
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'owner_id'
     ];
 
     public function tasks()
