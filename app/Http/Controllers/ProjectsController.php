@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProjectCreated;
 use Illuminate\Http\Request;
 
 //Because I use use App\Projects, I can call Project::all() without prefixing it with App\
@@ -39,8 +40,9 @@ class ProjectsController extends Controller
         auth()->guest(); //Bool, true if guest
 
 
-        $projects = Project::where('owner_id', auth()->id())->get(); //Select * from projects where owner_id = [current user id]
 
+        $projects = Project::where('owner_id', auth()->id())->get(); //Select * from projects where owner_id = [current user id]
+        dump($projects);
         //This  will look in resources/views/projects/index.blade.php
         return view('projects.index', compact('projects'));
     }
@@ -48,7 +50,6 @@ class ProjectsController extends Controller
     public function create()
 
     {
-
         return view('projects.create');
     }
 
@@ -77,7 +78,12 @@ class ProjectsController extends Controller
         $validate['owner_id'] = auth()->id();
 //        Even better
 //        And even better than this, could just wrap the above request in a Project::create() call and it would only take that one command
-        Project::create($validate);
+        $project = Project::create($validate);
+
+
+        \Mail::to('sebastian.awatramani@gmail.com')->send(
+            new  ProjectCreated($project)
+        );
 
         return redirect('/projects');
     }
