@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use \Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,6 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+            //If the before callback returns a non-null result that result will be considered the result of the check.
+        Gate::before(function($user){
+          return $user->admin;
+        });
     }
 }

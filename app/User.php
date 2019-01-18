@@ -28,7 +28,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function owns(Project $project) {
-        //TODO: check if user owns project
+
+
+    public function owns(Project $project, User $user) {
+        return $project->owner_id == $user->id;
     }
 }
