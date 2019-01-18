@@ -55,7 +55,7 @@ Route::get('/projects/create', 'ProjectsController@create');
 
 //Show specific project
 //GET project/x (show)
-Route::get('/projects/{project}', 'ProjectsController@show');  //Wild card
+Route::get('/projects/{project}', 'ProjectsController@show')->middleware('can:view, project');  //Wild card
 
 //Edit project
 Route::get('/projects/{project}/edit', "ProjectsController@edit"); //Will display a form to update the project

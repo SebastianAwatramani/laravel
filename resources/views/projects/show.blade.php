@@ -5,34 +5,35 @@
 @endsection
 
 @section('content')
-    <h1>{{ $project->title }}</h1>
+    <div class="box">
+        <h1 class="title">{{ $project->title }}</h1>
 
-    <div class="content">{{ $project->description }}</div>
-    @if($project->tasks->count())
-        <div>
-            @foreach($project->tasks as $task)
-                {{--Note that each form is separate--}}
-                <form method="POST" action="/completed-tasks/{{ $task->id }}" class="box">
-                    {{--@method("PATCH")--}}
-                    @csrf
+        <div class="content">{{ $project->description }}</div>
+        @if($project->tasks->count())
+            <div>
+                @foreach($project->tasks as $task)
+                    {{--Note that each form is separate--}}
+                    <form method="POST" action="/completed-tasks/{{ $task->id }}" class="box">
+                        {{--@method("PATCH")--}}
+                        @csrf
 
-                    @if($task->completed)
-                        @method("DELETE")
-                    @endif
+                        @if($task->completed)
+                            @method("DELETE")
+                        @endif
 
-                    <label for="completed" class="checkbox">
-                        <input type="checkbox" name="completed"
-                               onchange="this.form.submit()" {{$task->completed ? "checked" : ""}}>
-                        {{ $task->description }}
-                    </label>
-                </form>
+                        <label for="completed" class="checkbox">
+                            <input type="checkbox" name="completed"
+                                   onchange="this.form.submit()" {{$task->completed ? "checked" : ""}}>
+                            {{ $task->description }}
+                        </label>
+                    </form>
 
 
-            @endforeach
+                @endforeach
 
-        </div>
-    @endif
-
+            </div>
+        @endif
+    </div>
     <form class="box" action="/projects/{{ $project->id }}/tasks" method="POST">
         @csrf
         <div class="field">
@@ -50,6 +51,8 @@
     </form>
     @include('errors')
     <div>
-        <p><a href="/projects/{{ $project->id }}/edit">Edit Project</a></p>
+        @can('view', $project)
+            <p><a href="/projects/{{ $project->id }}/edit">Edit Project</a></p>
     </div>
+        @endcan
 @endsection

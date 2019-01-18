@@ -85,6 +85,27 @@ class ProjectsController extends Controller
     public function show(Project $project)
 
     {
+        /*
+         *
+         * AUTHORIZATION
+         *
+        */
+
+//        if($project->owner_id !== auth()->id()) {
+//            abort(403);
+//        }
+        //OR
+
+        //abort_if($project->owner_id !== auth()->id(), 403);
+
+        //OOP Approach
+
+        //abort_unless(auth()-user()-owns($project), 404); //In this instance, we would create an owns method in User()
+
+        //But instead, we'll use a POLICY approach
+//      authorize($methodToCallInPolicy, $whatToSend);  User() is also in policy->view(), but that is passed through automatically
+        $this->authorize('view', $project); //Looks like because of the mapping in AuthServiceProvider, this knows how to authorize
+
         //Here we are using a different method than passing $id and then using Project::FindorFail().
         //  Instead, we type hint with Project() and since we also have a wildcard, Laravel assumes we are trying to get a Project() with that ID
         //Can customize what Laravel looks for with ROUTE MODEL BINDING.  Override getRouteKeyName() method on the Eloquent model
