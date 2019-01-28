@@ -18,8 +18,11 @@ class ProjectCreated extends Mailable
      */
     public $project;
 
+    public $foo = "bar"; //Anything public here can be accessed in mail
+
     public function __construct($project)
     {
+//        Pass through anything I need to use in the email in this constructor
         $this->project = $project;
     }
 
@@ -33,3 +36,6 @@ class ProjectCreated extends Mailable
         return $this->markdown('mail.project-created');
     }
 }
+
+//Used in LFS30 - Mailables
+//Created with artisan make:mail ProjectCreated --markdown="emails.project-created"

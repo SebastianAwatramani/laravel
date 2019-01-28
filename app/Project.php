@@ -32,5 +32,9 @@ class Project extends Model
 //    relationship somewhere, but I wasn't able to figure it out'
         $this->tasks()->create($taskAttributes);
     }
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 
 }
