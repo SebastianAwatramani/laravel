@@ -86,9 +86,7 @@ class ProjectsController extends Controller
         $project = Project::create($validate);
 
 
-        \Mail::to($project->owner->email)->send(
-            new  ProjectCreated($project)
-        );
+
 
         return redirect('/projects');
     }
