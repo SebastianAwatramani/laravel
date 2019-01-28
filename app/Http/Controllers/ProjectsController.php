@@ -41,8 +41,13 @@ class ProjectsController extends Controller
 
 
 
-        $projects = Project::where('owner_id', auth()->id())->get(); //Select * from projects where owner_id = [current user id]
-        dump($projects);
+        //$projects = Project::where('owner_id', auth()->id())->get(); //Select * from projects where owner_id = [current user id]
+
+        //More readable.  We can simply call projects field here because we defined the relationship in user::projects()
+        $projects = auth()->user()->projects;
+
+
+
         //This  will look in resources/views/projects/index.blade.php
         return view('projects.index', compact('projects'));
     }
@@ -134,7 +139,7 @@ class ProjectsController extends Controller
         //dd() = die and dump.  Good for debugging
 
         //Short hand for update
-        $project->update(request(['title', 'description']));
+        $project->update($this->validateProject());
 
         //dd(request()->all());
 
@@ -155,5 +160,11 @@ class ProjectsController extends Controller
 
     }
 
+    protected function validateProject() {
+        return request()->validate([
+            'title' => ['required', 'min:3'],
+            'description' => 'required|min:3'
+        ]);
+    }
 
 }

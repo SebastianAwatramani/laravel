@@ -31,7 +31,7 @@
             {{ csrf_field() }}
 
             <button type="Submit">Delete</button>
-
+            @include('errors')
         </form>
     </div>
 @endsection
