@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProjectWasCreated;
 use App\Mail\ProjectCreated;
 use Illuminate\Http\Request;
 
@@ -85,7 +86,7 @@ class ProjectsController extends Controller
 //        And even better than this, could just wrap the above request in a Project::create() call and it would only take that one command
         $project = Project::create($validate);
 
-
+        event(new projectWasCreated($project));
 
 
         return redirect('/projects');
